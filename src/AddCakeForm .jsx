@@ -4,7 +4,6 @@ import * as Yup from "yup";
 import CreatableSelect from "react-select/creatable";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
-import { Toast } from "bootstrap";
 import { toast } from "react-toastify";
 
 // Validation Schema

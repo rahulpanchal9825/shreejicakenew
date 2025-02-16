@@ -71,7 +71,7 @@ const Home = () => {
                     marginBottom:"20px"
                   }}
                 >
-                  <img src={data2?.img} width="50%" style={{aspectRatio:"16/9"}}/>
+                  <img src={data2?.img} width="50%" style={{aspectRatio:"16/9"}} alt='cake'/>
                   <div style={{ fontWeight: '400', fontSize: `${isMobile ? "10px":"20px"}`}}>{data2?.title}</div>
                   <div style={{ fontWeight: '400', fontSize: `${isMobile ? "10px":"20px"}` }}>{data2?.price} /-</div>
                 </div>
