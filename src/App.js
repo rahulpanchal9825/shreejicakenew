@@ -4,7 +4,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Home from "./Home";
 import AddCakeForm from "./AddCakeForm ";
 import { ToastContainer } from "react-toastify";
-
 function App() {
   return (
     <Router>
