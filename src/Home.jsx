@@ -34,7 +34,7 @@ const Home = () => {
     <div
       style={{
         width: '100%',
-        // height: '100vh',
+        height: '100vh',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'start',
@@ -42,7 +42,7 @@ const Home = () => {
         overflowY:"auto"
       }}
     >
-      <div style={{ width: '50%' }}>
+      <div style={{ width: '50%' ,height:"100%"}}>
         <img src={cake1} width="100%" alt="Cake 1" />
         <div className="container1">
           {transformedData?.sort((a,b)=>b-a)?.map((ele, index) => (
