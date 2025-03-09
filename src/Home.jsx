@@ -4,6 +4,7 @@ import cake2 from "./cake2.jpg";
 import { useMediaQuery } from "react-responsive";
 import "aos/dist/aos.css";
 import AOS from "aos";
+import { AppBar, Box, Card, CardContent, CardMedia, Container, Grid, Link, TextField, Toolbar, Typography } from "@mui/material";
 const Home = () => {
   const [data, setData] = useState([]);
   const isMobile = useMediaQuery({ maxWidth: 430 }); // Mobile breakpoint
@@ -35,6 +36,8 @@ const Home = () => {
   useEffect(() => {
     AOS.init({ duration: 1000, once: false }); // Allows animation to repeat on scroll
   }, []);
+
+  console.log("transformedData",transformedData)
   return (
     <>
       {!transformedData?.length > 0 ? (
@@ -45,104 +48,52 @@ const Home = () => {
           onError={(e) => console.log("Image failed to load:", e.target.src)}
         />
       ) : (
-        <div
-          style={{
-            width: "100%",
-            height: "100vh",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "start",
-            background: "#000",
-            overflowY: "auto",
-          }}
-          data-aos="fade-up"
-        >
-          <div style={{ width: "70%", height: "100%" }}>
-            <img src={cake1} width="100%" alt="Cake 1" />
-            <div className="container1">
-              {transformedData
-                ?.sort((a, b) => b - a)
-                ?.map((ele, index) => (
-                  <div key={index} className="item">
-                    <div
-                      style={{
-                        display: "flex",
-                        width: "100%",
-                        justifyContent: "space-between",
-                        marginBottom: "10px",
-                      }}
-                    >
-                      {" "}
-                      <div>{ele?.category}</div> <div>{`   500mg`}</div>
-                    </div>
-
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "start",
-                        // justifyContent: 'space-between',
-                        fontSize: "16px",
-                        marginBottom: "30px",
-                        flexWrap: "wrap",
-                      }}
-                    >
-                      {ele?.items?.map((data2, index2) => (
-                        <div
-                          key={index2}
-                          style={{
-                            display: "flex",
-                            alignItems: "start",
-                            justifyContent: "space-between",
-                            fontSize: "14px",
-                            marginBottom: "10px",
-                            marginRight: "20px",
-                            flexDirection: "column",
-                            // width:"100%",
-                            flexWrap: "wrap",
-                          }}
-                        >
-                          <img
-                            src={decodeURIComponent(data2?.img)}
-                            width={isMobile?'100%':`200px`}
-                            style={{ aspectRatio: "16/9" }}
-                            alt="cake-new"
-                            // data-aos="fade-down"
-                          />
-                          <div
-                            style={{
-                              display: "flex",
-                              justifyContent: "space-between",
-                              width: "100%",
-                            }}
-                          >
-                            <div
-                              style={{
-                                fontWeight: "400",
-                                width: "70%",
-                                fontWeight: "600",
-                                fontSize: `${isMobile ? "10px" : "16px"}`,
-                              }}
-                            >
-                              {data2?.title}
-                            </div>
-                            <div
-                              style={{
-                                fontWeight: "400",
-                                fontSize: `${isMobile ? "10px" : "16px"}`,
-                              }}
-                            >
-                              {data2?.price} /-
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-            </div>
-            <img src={cake2} width="100%" alt="Cake 2" />
-          </div>
-        </div>
+        <Box>
+        {/* Header */}
+        <AppBar position="static" sx={{ background: "#fff", color: "#000" }}>
+          <Toolbar>
+            <Typography variant="h6" sx={{ flexGrow: 1 }}>Shreeji Baker's</Typography>
+            {/* <TextField variant="outlined" size="small" placeholder="Search" sx={{ marginRight: 2 }} /> */}
+          </Toolbar>
+        </AppBar>
+  
+        {/* Banner */}
+        <Box sx={{ textAlign: "center", padding: 4, backgroundColor: "#eaf6f6" }}>
+          <Typography variant="h4">CAKES BY CATEGORY</Typography>
+          <Typography variant="body1" maxWidth={600} margin="auto">
+                    Explore our delicious range of cakes categorized by flavors. Whether you love chocolate, fruit-based, or classic vanilla, we have something for every taste bud.
+                    Homemade cake is the best way to make any occasion extra-special.
+          </Typography>
+        </Box>
+  
+        <Container>
+          <Grid container spacing={4} sx={{ marginTop: 4 }}>
+  
+            {/* Cake Grid */}
+            <Grid item xs={12} md={9}>
+              {transformedData?.map((category,index) => (
+                <Box key={index} sx={{ marginBottom: 4 }}>
+                  <Typography variant="h5" sx={{ marginBottom: 2 }}>{category?.category}</Typography>
+                  <Grid container spacing={3}>
+                    {category.items.map((cake,index2) => (
+                      <Grid item xs={12} sm={6} md={4} key={cake.id}>
+                            <Card>
+                            <Link to={`/cake/${cake.id}`} style={{ textDecoration: "none", color: "inherit" }}>
+                          <CardMedia component="img" height="200" image={cake?.img} alt={cake?.title} />
+                          <CardContent>
+                            <Typography variant="h6">{cake?.title}</Typography>
+                                    </CardContent>
+                                    </Link>
+                        </Card>
+                      </Grid>
+                    ))}
+                  </Grid>
+                </Box>
+              ))}
+            </Grid>
+          </Grid>
+        </Container>
+      </Box>
       )}
     </>
   );
