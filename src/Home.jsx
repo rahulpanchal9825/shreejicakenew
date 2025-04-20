@@ -82,7 +82,7 @@ const Home = () => {
                   <Typography variant="h5" sx={{ marginBottom: 2 }}>{category?.category}</Typography>
                   <Grid container spacing={3}>
                     {category?.items?.map((cake,index2) => (
-                      <Grid item xs={12} sm={6} md={4} key={cake.id}
+                      <Grid item xs={12} sm={6} md={4} key={cake.id} sx={{cursor:"pointer"}}
                       onClick={()=>handleClick(cake?._id)}
                        >
                             <Card>
