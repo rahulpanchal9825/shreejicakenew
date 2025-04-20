@@ -12,7 +12,7 @@ import React, { useEffect, useState } from "react";
        try {
          const response = await fetch(
             // `https://cakenewback1.vercel.app/api/cake?id=${id}`
-            `https://cakenewback1.vercel.app/api?id=${id}`
+            `https://cakenewback1.vercel.app/api/cake?id=${id}`
         );
          const data = await response.json();
          console.log("12312312312",data?.product)
