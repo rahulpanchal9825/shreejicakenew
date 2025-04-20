@@ -15,8 +15,7 @@ import React, { useEffect, useState } from "react";
             `https://cakenewback1.vercel.app/api/cake?id=${id}`
         );
          const data = await response.json();
-         console.log("12312312312",data?.product)
-         setCake(data?.product);
+         setCake(data?.product); 
        } catch (err) {
          console.error("Error fetching cake:", err);
        } finally {
