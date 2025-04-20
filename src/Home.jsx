@@ -5,6 +5,7 @@ import { useMediaQuery } from "react-responsive";
 import "aos/dist/aos.css";
 import AOS from "aos";
 import { AppBar, Box, Card, CardContent, CardMedia, Container, Grid, Link, TextField, Toolbar, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 const Home = () => {
   const [data, setData] = useState([]);
   const isMobile = useMediaQuery({ maxWidth: 430 }); // Mobile breakpoint
@@ -36,8 +37,11 @@ const Home = () => {
   useEffect(() => {
     AOS.init({ duration: 1000, once: false }); // Allows animation to repeat on scroll
   }, []);
-
+  const navigate = useNavigate()
   console.log("transformedData",transformedData)
+  const handleClick = (id) => {
+    navigate(`cake/${id}`);
+  };
   return (
     <>
       {!transformedData?.length > 0 ? (
@@ -72,13 +76,17 @@ const Home = () => {
             {/* Cake Grid */}
             <Grid item xs={12} md={9}>
               {transformedData?.map((category,index) => (
-                <Box key={index} sx={{ marginBottom: 4 }}>
+                <Box key={index} sx={{ marginBottom: 4 }} 
+                
+                >
                   <Typography variant="h5" sx={{ marginBottom: 2 }}>{category?.category}</Typography>
                   <Grid container spacing={3}>
-                    {category.items.map((cake,index2) => (
-                      <Grid item xs={12} sm={6} md={4} key={cake.id}>
+                    {category?.items?.map((cake,index2) => (
+                      <Grid item xs={12} sm={6} md={4} key={cake.id}
+                      onClick={()=>handleClick(cake?._id)}
+                       >
                             <Card>
-                            <Link to={`/cake/${cake.id}`} style={{ textDecoration: "none", color: "inherit" }}>
+                            <Link to={`/cake/${cake?.id}`} style={{ textDecoration: "none", color: "inherit" }}>
                           <CardMedia component="img" height="200" image={cake?.img} alt={cake?.title} />
                           <CardContent>
                             <Typography variant="h6">{cake?.title}</Typography>
